@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StudentProfile } from '../types';
-import { toPersianDigits, formatTomans } from '../utils/formatters';
-import { ASSETS } from '../assets';
+import { toPersianDigits } from '../utils/formatters';
 import { 
   Building2, 
   Lock, 
@@ -12,12 +11,10 @@ import {
   RotateCw, 
   AlertCircle, 
   ArrowLeft, 
-  CheckCircle2,
-  FileSpreadsheet,
   GraduationCap,
   UserPlus,
-  Users,
-  ChevronDown
+  CheckSquare,
+  Square
 } from 'lucide-react';
 
 interface AuthLoginViewProps {
@@ -26,83 +23,24 @@ interface AuthLoginViewProps {
   onOpenExcelManager: () => void;
 }
 
-// Sample student directory for instant selection
-const SAMPLE_STUDENTS_LIST: Partial<StudentProfile>[] = [
-  {
-    firstName: 'حسن',
-    lastName: 'رحیم زاده خراسانی',
-    studentCode: '44162424',
-    nationalCode: '0250680424',
-    major: 'حسابداری و مدیریت مالی',
-    faculty: 'دانشکده علوم انسانی و مدیریت',
-    currentTermNumber: 3,
-    totalGpa: 17.95,
-    tuitionBalance: 70000000,
-    supervisor: 'دکتر سید محسن حسینی'
-  },
-  {
-    firstName: 'امیرحسین',
-    lastName: 'رضایی سپاهانی',
-    studentCode: '9912040112',
-    nationalCode: '1270984512',
-    major: 'مهندسی کامپیوتر - نرم‌افزار',
-    faculty: 'دانشکده مهندسی و علوم فنی',
-    currentTermNumber: 5,
-    totalGpa: 17.84,
-    tuitionBalance: 32500000,
-    supervisor: 'دکتر احسان صادقی'
-  },
-  {
-    firstName: 'سارا',
-    lastName: 'کاظمی',
-    studentCode: '9912040113',
-    nationalCode: '1280145621',
-    major: 'مهندسی معماری',
-    faculty: 'دانشکده هنر و معماری',
-    currentTermNumber: 3,
-    totalGpa: 18.40,
-    tuitionBalance: 18000000,
-    supervisor: 'دکتر بهمن حیدری'
-  },
-  {
-    firstName: 'محمد',
-    lastName: 'مهدوی',
-    studentCode: '40102566',
-    nationalCode: '1290334455',
-    major: 'مهندسی عمران',
-    faculty: 'دانشکده مهندسی و علوم فنی',
-    currentTermNumber: 4,
-    totalGpa: 16.70,
-    tuitionBalance: 45000000,
-    supervisor: 'دکتر ناصر فلاحی'
-  },
-  {
-    firstName: 'نیلوفر',
-    lastName: 'صادقی',
-    studentCode: '40211890',
-    nationalCode: '1274567890',
-    major: 'مدیریت بازرگانی (MBA)',
-    faculty: 'دانشکده علوم انسانی و مدیریت',
-    currentTermNumber: 2,
-    totalGpa: 19.10,
-    tuitionBalance: 0,
-    supervisor: 'دکتر فرشته کریمی'
-  }
-];
-
 export const AuthLoginView: React.FC<AuthLoginViewProps> = ({
   onLoginSuccess,
   currentStudent,
   onOpenExcelManager
 }) => {
-  const [studentCode, setStudentCode] = useState(currentStudent.studentCode || '');
-  const [password, setPassword] = useState(currentStudent.nationalCode || '');
+  // Load remembered username on this device if previously saved
+  const [studentCode, setStudentCode] = useState<string>(() => {
+    return localStorage.getItem('sepahan_saved_username') || '';
+  });
+  const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState<boolean>(() => {
+    return localStorage.getItem('sepahan_remember_device') === 'true';
+  });
   const [captchaInput, setCaptchaInput] = useState('');
-  const [captchaCode, setCaptchaCode] = useState('8349');
+  const [captchaCode, setCaptchaCode] = useState('7294');
   const [userRole, setUserRole] = useState<'student' | 'professor' | 'staff'>('student');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [showQuickDirectory, setShowQuickDirectory] = useState(false);
 
   // Regenerate random 4-digit captcha
   const refreshCaptcha = () => {
@@ -115,53 +53,58 @@ export const AuthLoginView: React.FC<AuthLoginViewProps> = ({
     e.preventDefault();
     setErrorMessage(null);
 
-    if (!studentCode.trim()) {
+    const cleanCode = studentCode.trim();
+    const cleanPass = password.trim();
+
+    if (!cleanCode) {
       setErrorMessage('لطفاً شماره دانشجویی یا نام کاربری خود را وارد فرمایید.');
       return;
     }
 
-    if (!password.trim()) {
+    if (!cleanPass) {
       setErrorMessage('لطفاً کلمه عبور (کد ملی) را وارد فرمایید.');
       return;
     }
 
     if (captchaInput.trim() !== captchaCode) {
-      setErrorMessage('کد امنیتی وارد شده اشتباه است. لطفاً مجدداً امتحان کنید.');
+      setErrorMessage('کد امنیتی داخل تصویر اشتباه است. لطفاً مجدداً امتحان کنید.');
       refreshCaptcha();
       return;
+    }
+
+    // Save or clear on this device
+    if (rememberMe) {
+      localStorage.setItem('sepahan_saved_username', cleanCode);
+      localStorage.setItem('sepahan_remember_device', 'true');
+    } else {
+      localStorage.removeItem('sepahan_saved_username');
+      localStorage.removeItem('sepahan_remember_device');
+    }
+
+    // Trigger Browser / Google Password Manager Credential Store API
+    try {
+      if (typeof window !== 'undefined' && 'PasswordCredential' in window && navigator.credentials) {
+        const cred = new (window as any).PasswordCredential({
+          id: cleanCode,
+          password: cleanPass,
+          name: currentStudent.firstName ? `${currentStudent.firstName} ${currentStudent.lastName}` : cleanCode
+        });
+        navigator.credentials.store(cred).catch(() => {});
+      }
+    } catch (_) {
+      // Ignored for browsers that do not support Credential Management API
     }
 
     setIsLoading(true);
 
     setTimeout(() => {
       setIsLoading(false);
-      
-      // Check if matches one of the sample directory profiles
-      const matched = SAMPLE_STUDENTS_LIST.find(s => s.studentCode === studentCode.trim());
-
-      if (matched) {
-        onLoginSuccess({
-          ...currentStudent,
-          ...matched,
-          studentCode: studentCode.trim(),
-          nationalCode: password.trim()
-        } as StudentProfile);
-      } else {
-        onLoginSuccess({
-          ...currentStudent,
-          studentCode: studentCode.trim(),
-          nationalCode: password.trim()
-        });
-      }
-    }, 400);
-  };
-
-  // Quick select a student from directory
-  const handleSelectStudent = (std: Partial<StudentProfile>) => {
-    setStudentCode(std.studentCode || '');
-    setPassword(std.nationalCode || '');
-    setCaptchaInput(captchaCode); // Auto-fill captcha for easy 1-click test
-    setShowQuickDirectory(false);
+      onLoginSuccess({
+        ...currentStudent,
+        studentCode: cleanCode,
+        nationalCode: cleanPass
+      });
+    }, 350);
   };
 
   // Quick 1-Click Demo Login
@@ -169,7 +112,11 @@ export const AuthLoginView: React.FC<AuthLoginViewProps> = ({
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      onLoginSuccess(currentStudent);
+      onLoginSuccess({
+        ...currentStudent,
+        studentCode: studentCode.trim() || '40210011',
+        nationalCode: password.trim() || '1270000000'
+      });
     }, 300);
   };
 
@@ -214,12 +161,12 @@ export const AuthLoginView: React.FC<AuthLoginViewProps> = ({
           <div className="relative z-10 my-6 bg-white/5 border border-white/10 rounded-2xl p-4 backdrop-blur-xs space-y-2.5">
             <h3 className="text-xs font-bold text-white flex items-center gap-2">
               <GraduationCap className="w-4 h-4 text-amber-400" />
-              راهنمای ورود به سامانه:
+              راهنمای ورود به پرتال:
             </h3>
             <ul className="text-[11px] text-blue-100 space-y-1.5 list-disc list-inside">
               <li><strong>نام کاربری:</strong> شماره دانشجویی معتبر</li>
               <li><strong>کلمه عبور:</strong> کد ملی ۱۰ رقمی (بدون خط تیره)</li>
-              <li>در صورت عدم داشتن پرونده، دکمه <strong>«ثبت‌نام دانشجو جدید»</strong> را بزنید.</li>
+              <li>با انتخاب <strong>«ذخیره در این سیستم»</strong>، مرورگر و گوگل رمز شما را خودکار پیشنهاد خواهند داد.</li>
             </ul>
           </div>
 
@@ -282,40 +229,52 @@ export const AuthLoginView: React.FC<AuthLoginViewProps> = ({
               </div>
             )}
 
-            {/* Form */}
-            <form onSubmit={handleLogin} className="space-y-3.5">
+            {/* Standard AutoFill-friendly Form */}
+            <form 
+              id="sepahan-login-form"
+              name="sepahanLoginForm"
+              action="#"
+              method="POST"
+              onSubmit={handleLogin} 
+              className="space-y-3.5"
+            >
               
               {/* Username / Student Code */}
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label htmlFor="username" className="block text-xs font-bold text-slate-700 mb-1">
                   {userRole === 'student' ? 'شماره دانشجویی:' : 'کد پرسنلی:'}
                 </label>
                 <div className="relative">
                   <input
+                    id="username"
+                    name="username"
                     type="text"
                     inputMode="numeric"
+                    autoComplete="username"
+                    autoCapitalize="none"
+                    spellCheck={false}
                     value={studentCode}
                     onChange={(e) => setStudentCode(e.target.value)}
-                    placeholder="شماره دانشجویی را وارد کنید"
-                    className="w-full pl-10 pr-3.5 py-2 bg-slate-50 border border-slate-300 focus:border-blue-600 focus:bg-white rounded-xl text-xs sm:text-sm font-mono focus:ring-2 focus:ring-blue-100 outline-hidden transition-all text-left"
+                    placeholder="شماره دانشجویی را وارد فرمایید"
+                    className="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-300 focus:border-blue-600 focus:bg-white rounded-xl text-xs sm:text-sm font-mono focus:ring-2 focus:ring-blue-100 outline-hidden transition-all text-left"
                     dir="ltr"
                     required
                   />
-                  <UserCheck className="w-4 h-4 text-slate-400 absolute left-3.5 top-2.5 pointer-events-none" />
+                  <UserCheck className="w-4 h-4 text-slate-400 absolute left-3.5 top-3 pointer-events-none" />
                 </div>
               </div>
 
               {/* Password / National Code */}
               <div>
                 <div className="flex items-center justify-between mb-1">
-                  <label className="text-xs font-bold text-slate-700">
+                  <label htmlFor="password" className="text-xs font-bold text-slate-700">
                     کلمه عبور (کد ملی):
                   </label>
                   <a
                     href="#forgot"
                     onClick={(e) => {
                       e.preventDefault();
-                      alert('کلمه عبور پیش‌فرض دانشجویان، کد ملی ۱۰ رقمی ثبت‌شده در پرونده می‌باشد.');
+                      alert('کلمه عبور پیش‌فرض دانشجویان، کد ملی ۱۰ رقمی ثبت‌شده در پرونده آموزشی می‌باشد.');
                     }}
                     className="text-[11px] text-blue-600 hover:underline"
                   >
@@ -324,29 +283,49 @@ export const AuthLoginView: React.FC<AuthLoginViewProps> = ({
                 </div>
                 <div className="relative">
                   <input
+                    id="password"
+                    name="password"
                     type="password"
-                    inputMode="numeric"
+                    autoComplete="current-password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="کد ملی ۱۰ رقمی"
-                    className="w-full pl-10 pr-3.5 py-2 bg-slate-50 border border-slate-300 focus:border-blue-600 focus:bg-white rounded-xl text-xs sm:text-sm font-mono focus:ring-2 focus:ring-blue-100 outline-hidden transition-all text-left tracking-widest"
+                    className="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-300 focus:border-blue-600 focus:bg-white rounded-xl text-xs sm:text-sm font-mono focus:ring-2 focus:ring-blue-100 outline-hidden transition-all text-left tracking-widest"
                     dir="ltr"
                     required
                   />
-                  <KeyRound className="w-4 h-4 text-slate-400 absolute left-3.5 top-2.5 pointer-events-none" />
+                  <KeyRound className="w-4 h-4 text-slate-400 absolute left-3.5 top-3 pointer-events-none" />
                 </div>
+              </div>
+
+              {/* Remember on this Device Checkbox */}
+              <div className="flex items-center justify-between py-0.5">
+                <label 
+                  onClick={() => setRememberMe(!rememberMe)}
+                  className="flex items-center gap-2 cursor-pointer select-none text-xs text-slate-700 hover:text-blue-900"
+                >
+                  {rememberMe ? (
+                    <CheckSquare className="w-4 h-4 text-blue-700" />
+                  ) : (
+                    <Square className="w-4 h-4 text-slate-400" />
+                  )}
+                  <span className="font-medium">ذخیره مشخصات در این سیستم (پیشنهاد خودکار مرورگر و گوگل)</span>
+                </label>
               </div>
 
               {/* Captcha Box */}
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label htmlFor="captcha" className="block text-xs font-bold text-slate-700 mb-1">
                   کد امنیتی داخل تصویر:
                 </label>
                 <div className="flex items-center gap-2">
                   <input
+                    id="captcha"
+                    name="captcha"
                     type="text"
                     inputMode="numeric"
                     maxLength={4}
+                    autoComplete="off"
                     value={captchaInput}
                     onChange={(e) => setCaptchaInput(e.target.value)}
                     placeholder="کد ۴ رقمی"
@@ -393,65 +372,31 @@ export const AuthLoginView: React.FC<AuthLoginViewProps> = ({
             </form>
           </div>
 
-          {/* Quick Registration & Sample Student Picker */}
+          {/* Quick Registration & Excel Manager */}
           <div className="mt-5 pt-4 border-t border-slate-100 space-y-2.5">
-            
             <div className="flex flex-col sm:flex-row items-stretch gap-2">
-              
-              {/* Register / Excel Button */}
               <button
                 type="button"
                 onClick={onOpenExcelManager}
                 className="flex-1 py-2 px-3 bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-950 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
               >
                 <UserPlus className="w-3.5 h-3.5 text-blue-700" />
-                <span>ثبت‌نام دانشجو جدید / تنظیم مشخصات</span>
+                <span>ثبت‌نام دانشجو جدید / ورود اطلاعات</span>
               </button>
 
-              {/* Quick Directory Toggle */}
-              <button
-                type="button"
-                onClick={() => setShowQuickDirectory(!showQuickDirectory)}
-                className="py-2 px-3 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-medium transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
-              >
-                <Users className="w-3.5 h-3.5 text-slate-600" />
-                <span>انتخاب دانشجو نمونه</span>
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${showQuickDirectory ? 'rotate-180' : ''}`} />
-              </button>
-            </div>
-
-            {/* Quick Students Dropdown Picker */}
-            {showQuickDirectory && (
-              <div className="p-2 bg-slate-50 border border-slate-200 rounded-xl space-y-1 animate-in fade-in duration-150">
-                <p className="text-[11px] font-bold text-slate-600 px-1">انتخاب سریع پرونده برای تست ورود:</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 max-h-36 overflow-y-auto">
-                  {SAMPLE_STUDENTS_LIST.map((std) => (
-                    <button
-                      key={std.studentCode}
-                      type="button"
-                      onClick={() => handleSelectStudent(std)}
-                      className="text-right p-1.5 rounded-lg hover:bg-white hover:shadow-xs border border-transparent hover:border-slate-200 text-xs transition-all flex items-center justify-between cursor-pointer"
-                    >
-                      <div>
-                        <span className="font-bold text-slate-800">{std.firstName} {std.lastName}</span>
-                        <span className="text-[10px] text-blue-700 block">{std.major} (ترم {toPersianDigits(std.currentTermNumber || 1)})</span>
-                      </div>
-                      <span className="text-[10px] text-slate-400 font-mono">{std.studentCode}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1">
-              <span>پشتیبانی پرتال: ۰۳۱-۳۶۷۰۵۰۰۰</span>
               <button
                 type="button"
                 onClick={handleQuickDemoLogin}
-                className="text-emerald-700 hover:underline font-bold cursor-pointer"
+                className="py-2 px-3 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
               >
-                ورود سریع آزمایشی →
+                <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+                <span>ورود دمو (تست پرتال)</span>
               </button>
+            </div>
+
+            <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1">
+              <span>پشتیبانی پرتال: ۰۳۱-۳۶۷۰۵۰۰۰</span>
+              <span>موسسه آموزش عالی سپاهان</span>
             </div>
           </div>
 

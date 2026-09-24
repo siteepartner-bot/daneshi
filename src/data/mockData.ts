@@ -2,25 +2,25 @@ import { StudentProfile, Course, PaymentTransaction, SemesterGrade, Announcement
 import { ASSETS } from '../assets';
 
 export const INITIAL_STUDENT_PROFILE: StudentProfile = {
-  id: 'std_44162424',
-  studentCode: '44162424',
-  nationalCode: '0250680424',
-  firstName: 'حسن',
-  lastName: 'رحیم زاده خراسانی',
+  id: 'std_demo_user',
+  studentCode: '',
+  nationalCode: '',
+  firstName: 'دانشجو',
+  lastName: 'موسسه آموزش عالی سپاهان',
   major: 'حسابداری و مدیریت مالی',
   faculty: 'دانشکده علوم انسانی و مدیریت',
   degree: 'کارشناسی پیوسته',
   entranceYear: '۱۴۰۲',
   currentSemester: 'نیمسال اول ۱۴۰۴ - ۱۴۰۵',
   currentTermNumber: 3,
-  totalGpa: 17.95,
-  lastSemesterGpa: 18.30,
-  totalPassedUnits: 42,
-  maxSelectableUnits: 24, // GPA > 17 gets 24 units
+  totalGpa: 17.50,
+  lastSemesterGpa: 17.80,
+  totalPassedUnits: 38,
+  maxSelectableUnits: 20,
   minSelectableUnits: 12,
-  tuitionBalance: 70000000, // 7,000,000 Tomans (70,000,000 Rials)
-  fixedTuition: 22000000,   // 2,200,000 Tomans
-  variableTuitionPerUnit: 1200000, // 120,000 Tomans per unit
+  tuitionBalance: 0,
+  fixedTuition: 22000000,
+  variableTuitionPerUnit: 1200000,
   avatarUrl: ASSETS.studentAvatar,
   status: 'اشتغال به تحصیل',
   supervisor: 'دکتر سید محسن حسینی (عضو هیئت علمی گروه حسابداری)'
@@ -270,7 +270,7 @@ export const INITIAL_PAYMENT_TRANSACTIONS: PaymentTransaction[] = [
     id: 'tx_01',
     trackingCode: 'SHP-994827103',
     referenceNumber: 'REF-789012345678',
-    amount: 15000000, // 1,500,000 Tomans
+    amount: 15000000,
     date: '۱۴۰۳/۱۱/۱۵',
     time: '۱۴:۳۲:۱۸',
     gateway: 'سامان کیش',
@@ -278,19 +278,6 @@ export const INITIAL_PAYMENT_TRANSACTIONS: PaymentTransaction[] = [
     description: 'پرداخت علی‌الحساب شهریه ثابت نیمسال اول ۱۴۰۴ - ۱۴۰۵',
     cardNumberMasked: '۶۲۱۹-****-****-۴۴۵۲',
     receiptNumber: 'RCP-883921'
-  },
-  {
-    id: 'tx_02',
-    trackingCode: 'SHP-883920194',
-    referenceNumber: 'REF-554123987654',
-    amount: 12000000, // 1,200,000 Tomans
-    date: '۱۴۰۳/۰۷/۱۰',
-    time: '۰۹:۱۵:۴۴',
-    gateway: 'به‌پرداخت ملت',
-    status: 'موفق',
-    description: 'تسویه بدهی نیمسال دوم سال تحصیلی ۱۴۰۲ - ۱۴۰۳',
-    cardNumberMasked: '۶۱۰۴-****-****-۱۱۸۹',
-    receiptNumber: 'RCP-661092'
   }
 ];
 
@@ -314,8 +301,8 @@ export const TRANSCRIPT_HISTORY: SemesterGrade[] = [
   {
     termName: 'نیمسال دوم ۱۴۰۲ - ۱۴۰۳',
     termNumber: 2,
-    passedUnits: 22,
-    termGpa: 18.30,
+    passedUnits: 18,
+    termGpa: 18.10,
     courses: [
       { code: '15-110-105', name: 'کلیات اقتصاد کلان', units: 3, grade: 18.0, status: 'قبول' },
       { code: '15-110-106', name: 'روش‌های آماری در حسابداری و مدیریت', units: 3, grade: 19.0, status: 'قبول' },
@@ -324,9 +311,7 @@ export const TRANSCRIPT_HISTORY: SemesterGrade[] = [
       { code: '12-001-107', name: 'تاریخ تحلیلی صدر اسلام', units: 2, grade: 18.0, status: 'قبول' },
       { code: '12-001-108', name: 'ورزش ۱', units: 1, grade: 19.5, status: 'قبول' },
       { code: '12-001-109', name: 'تفسیر موضوعی قرآن', units: 2, grade: 18.5, status: 'قبول' },
-      { code: '12-001-110', name: 'دانش خانواده و جمعیت', units: 1, grade: 18.0, status: 'قبول' },
       { code: '15-110-109', name: 'مالیه عمومی و بودجه‌ریزی', units: 3, grade: 17.5, status: 'قبول' },
-      { code: '15-110-110', name: 'اخلاق حرفه‌ای در حسابداری', units: 3, grade: 19.5, status: 'قبول' },
     ]
   }
 ];
@@ -338,7 +323,7 @@ export const ANNOUNCEMENTS: AnnouncementItem[] = [
     category: 'آموزشی',
     date: '۱۴۰۳/۱۱/۲۰',
     isImportant: true,
-    content: 'به اطلاع دانشجویان محترم رشته حسابداری و مدیریت موسسه آموزش عالی سپاهان می‌رساند فرآیند انتخاب واحد طبق جدول زمان‌بندی در پرتال آموزشی آغاز شده است.',
+    content: 'به اطلاع کلیه دانشجویان گرامی موسسه آموزش عالی غیرانتفاعی سپاهان می‌رساند فرآیند انتخاب واحد طبق جدول زمان‌بندی در پرتال آموزشی فعال است.',
     author: 'معاونت آموزشی و تحصیلات تکمیلی موسسه سپاهان'
   },
   {

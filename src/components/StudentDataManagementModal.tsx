@@ -321,7 +321,7 @@ export const StudentDataManagementModal: React.FC<StudentDataManagementModalProp
                       type="text"
                       value={formData.firstName || ''}
                       onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                      placeholder="امیرحسین"
+                      placeholder="نام دانشجو"
                       className="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:ring-2 focus:ring-blue-500 outline-hidden"
                     />
                   </div>
@@ -331,7 +331,7 @@ export const StudentDataManagementModal: React.FC<StudentDataManagementModalProp
                       type="text"
                       value={formData.lastName || ''}
                       onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                      placeholder="رضایی"
+                      placeholder="نام خانوادگی دانشجو"
                       className="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs focus:ring-2 focus:ring-blue-500 outline-hidden"
                     />
                   </div>
@@ -342,7 +342,7 @@ export const StudentDataManagementModal: React.FC<StudentDataManagementModalProp
                       inputMode="numeric"
                       value={formData.studentCode || ''}
                       onChange={(e) => setFormData({ ...formData, studentCode: e.target.value })}
-                      placeholder="9912040112"
+                      placeholder="شماره دانشجویی"
                       className="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-mono text-left focus:ring-2 focus:ring-blue-500 outline-hidden"
                       dir="ltr"
                     />
@@ -354,7 +354,7 @@ export const StudentDataManagementModal: React.FC<StudentDataManagementModalProp
                       inputMode="numeric"
                       value={formData.nationalCode || ''}
                       onChange={(e) => setFormData({ ...formData, nationalCode: e.target.value })}
-                      placeholder="1270984512"
+                      placeholder="کد ملی ۱۰ رقمی"
                       className="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-mono text-left focus:ring-2 focus:ring-blue-500 outline-hidden"
                       dir="ltr"
                     />

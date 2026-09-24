@@ -57,11 +57,7 @@ export default function App() {
     const saved = localStorage.getItem('sepahan_student_profile');
     if (saved) {
       try {
-        const parsed = JSON.parse(saved);
-        if (parsed.studentCode === '9912040112' || !parsed.studentCode) {
-          return INITIAL_STUDENT_PROFILE;
-        }
-        return parsed;
+        return JSON.parse(saved);
       } catch (e) {
         return INITIAL_STUDENT_PROFILE;
       }
