@@ -32,6 +32,7 @@ import { AnnouncementsAndRequests } from './components/AnnouncementsAndRequests'
 import { UniversityIntroLanding } from './components/UniversityIntroLanding';
 import { OnlinePaymentModal } from './components/OnlinePaymentModal';
 import { StudentDataManagementModal } from './components/StudentDataManagementModal';
+import { AuthLoginView } from './components/AuthLoginView';
 import { 
   Home, 
   BookOpenCheck, 
@@ -43,6 +44,11 @@ import {
 } from 'lucide-react';
 
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
+    const saved = localStorage.getItem('sepahan_is_logged_in');
+    return saved !== null ? JSON.parse(saved) : true;
+  });
+
   const [activeTab, setActiveTab] = useState<ViewTab>('dashboard');
   const [studentManagerOpen, setStudentManagerOpen] = useState(false);
 
@@ -76,6 +82,10 @@ export default function App() {
   const [pendingPaymentDesc, setPendingPaymentDesc] = useState('');
 
   // Save changes to LocalStorage
+  useEffect(() => {
+    localStorage.setItem('sepahan_is_logged_in', JSON.stringify(isLoggedIn));
+  }, [isLoggedIn]);
+
   useEffect(() => {
     localStorage.setItem('sepahan_student_profile', JSON.stringify(student));
   }, [student]);
@@ -168,6 +178,32 @@ export default function App() {
     setStudentRequests(prev => [newReq, ...prev]);
   };
 
+  // If user is not logged in, render the authentic University Login View
+  if (!isLoggedIn) {
+    return (
+      <>
+        <AuthLoginView
+          currentStudent={student}
+          onLoginSuccess={(loggedInStudent) => {
+            setStudent(loggedInStudent);
+            setIsLoggedIn(true);
+          }}
+          onOpenExcelManager={() => setStudentManagerOpen(true)}
+        />
+
+        <StudentDataManagementModal
+          isOpen={studentManagerOpen}
+          onClose={() => setStudentManagerOpen(false)}
+          currentStudent={student}
+          onUpdateStudentProfile={(updated) => {
+            setStudent(updated);
+            setIsLoggedIn(true);
+          }}
+        />
+      </>
+    );
+  }
+
   return (
     <div className="min-h-screen flex flex-col bg-slate-100 text-slate-800 pb-20 lg:pb-8">
       
@@ -178,6 +214,7 @@ export default function App() {
         student={student}
         announcements={ANNOUNCEMENTS}
         onOpenStudentManager={() => setStudentManagerOpen(true)}
+        onLogout={() => setIsLoggedIn(false)}
       />
 
       {/* Main Content Area */}

@@ -23,6 +23,7 @@ interface NavbarProps {
   student: StudentProfile;
   announcements: AnnouncementItem[];
   onOpenStudentManager: () => void;
+  onLogout: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -30,7 +31,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   onTabChange,
   student,
   announcements,
-  onOpenStudentManager
+  onOpenStudentManager,
+  onLogout
 }) => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -293,6 +295,19 @@ export const Navbar: React.FC<NavbarProps> = ({
                     <span>صفحه معرفی موسسه</span>
                     <Building2 className="w-3.5 h-3.5" />
                   </button>
+
+                  <div className="my-1 border-t border-slate-100"></div>
+
+                  <button
+                    onClick={() => {
+                      setShowUserDropdown(false);
+                      onLogout();
+                    }}
+                    className="w-full text-right px-3 py-2 text-xs text-red-600 hover:bg-red-50 rounded-lg font-bold cursor-pointer transition-colors flex items-center justify-between"
+                  >
+                    <span>خروج از حساب کاربری</span>
+                    <LogOut className="w-3.5 h-3.5 text-red-500" />
+                  </button>
                 </div>
               )}
             </div>
@@ -412,6 +427,17 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <span>معرفی و پرتال عمومی دانشگاه</span>
             <Building2 className="w-4 h-4" />
+          </button>
+
+          <button
+            onClick={() => {
+              setShowMobileMenu(false);
+              onLogout();
+            }}
+            className="w-full text-right px-3 py-2.5 rounded-lg text-sm font-bold text-red-600 hover:bg-red-50 flex items-center justify-between"
+          >
+            <span>خروج از حساب</span>
+            <LogOut className="w-4 h-4 text-red-500" />
           </button>
         </div>
       )}
