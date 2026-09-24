@@ -46,7 +46,7 @@ import {
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
     const saved = localStorage.getItem('sepahan_is_logged_in');
-    return saved !== null ? JSON.parse(saved) : true;
+    return saved === 'true'; // Default to login screen so user sees authentication immediately
   });
 
   const [activeTab, setActiveTab] = useState<ViewTab>('dashboard');
@@ -55,13 +55,35 @@ export default function App() {
   // Persistent student profile
   const [student, setStudent] = useState<StudentProfile>(() => {
     const saved = localStorage.getItem('sepahan_student_profile');
-    return saved ? JSON.parse(saved) : INITIAL_STUDENT_PROFILE;
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (parsed.studentCode === '9912040112' || !parsed.studentCode) {
+          return INITIAL_STUDENT_PROFILE;
+        }
+        return parsed;
+      } catch (e) {
+        return INITIAL_STUDENT_PROFILE;
+      }
+    }
+    return INITIAL_STUDENT_PROFILE;
   });
 
   // Persistent enrolled courses
   const [enrolledCourses, setEnrolledCourses] = useState<Course[]>(() => {
     const saved = localStorage.getItem('sepahan_enrolled_courses');
-    return saved ? JSON.parse(saved) : INITIAL_ENROLLED_COURSES;
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.some((c: any) => c.id === 'crs_01')) {
+          return INITIAL_ENROLLED_COURSES;
+        }
+        return parsed;
+      } catch (e) {
+        return INITIAL_ENROLLED_COURSES;
+      }
+    }
+    return INITIAL_ENROLLED_COURSES;
   });
 
   // Persistent payment history

@@ -206,7 +206,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
 
             {/* Student Profile Quick View */}
-            <div className="relative">
+            <div className="relative flex items-center gap-1.5">
               <button
                 onClick={() => setShowUserDropdown(!showUserDropdown)}
                 className="flex items-center gap-2 p-1.5 pr-2.5 sm:pr-3 rounded-xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-colors cursor-pointer focus:outline-hidden"
@@ -230,6 +230,16 @@ export const Navbar: React.FC<NavbarProps> = ({
                   </span>
                 </div>
                 <ChevronDown className="w-3.5 h-3.5 text-slate-400 hidden sm:block" />
+              </button>
+
+              {/* Direct Quick Logout / Switch Account Button */}
+              <button
+                onClick={onLogout}
+                title="خروج و رفتن به صفحه لاگین دانشگاه"
+                className="hidden md:flex items-center gap-1 px-2 py-1.5 text-xs text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 rounded-xl font-bold transition-colors cursor-pointer"
+              >
+                <LogOut className="w-3.5 h-3.5 text-red-600" />
+                <span>خروج / لاگین</span>
               </button>
 
               {/* User Dropdown */}

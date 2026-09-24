@@ -2,42 +2,42 @@ import { StudentProfile, Course, PaymentTransaction, SemesterGrade, Announcement
 import { ASSETS } from '../assets';
 
 export const INITIAL_STUDENT_PROFILE: StudentProfile = {
-  id: 'std_40112345',
-  studentCode: '9912040112',
-  nationalCode: '1270984512',
-  firstName: 'امیرحسین',
-  lastName: 'رضایی سپاهانی',
-  major: 'مهندسی کامپیوتر - نرم‌افزار',
-  faculty: 'دانشکده مهندسی و علوم فنی',
+  id: 'std_44162424',
+  studentCode: '44162424',
+  nationalCode: '0250680424',
+  firstName: 'حسن',
+  lastName: 'رحیم زاده خراسانی',
+  major: 'حسابداری و مدیریت مالی',
+  faculty: 'دانشکده علوم انسانی و مدیریت',
   degree: 'کارشناسی پیوسته',
-  entranceYear: '۱۴۰۱',
+  entranceYear: '۱۴۰۲',
   currentSemester: 'نیمسال اول ۱۴۰۴ - ۱۴۰۵',
-  currentTermNumber: 5,
-  totalGpa: 17.84,
-  lastSemesterGpa: 18.25,
-  totalPassedUnits: 76,
-  maxSelectableUnits: 20, // GPA > 17 gets 24, but standard 20
+  currentTermNumber: 3,
+  totalGpa: 17.95,
+  lastSemesterGpa: 18.30,
+  totalPassedUnits: 42,
+  maxSelectableUnits: 24, // GPA > 17 gets 24 units
   minSelectableUnits: 12,
-  tuitionBalance: 32500000, // 3,250,000 Tomans (32,500,000 Rials)
-  fixedTuition: 18000000,   // 1,800,000 Tomans
+  tuitionBalance: 70000000, // 7,000,000 Tomans (70,000,000 Rials)
+  fixedTuition: 22000000,   // 2,200,000 Tomans
   variableTuitionPerUnit: 1200000, // 120,000 Tomans per unit
   avatarUrl: ASSETS.studentAvatar,
   status: 'اشتغال به تحصیل',
-  supervisor: 'دکتر مهران کاظمی (عضو هیئت علمی گروه کامپیوتر)'
+  supervisor: 'دکتر سید محسن حسینی (عضو هیئت علمی گروه حسابداری)'
 };
 
 export const AVAILABLE_COURSES: Course[] = [
   {
-    id: 'crs_01',
-    code: '14-110-301',
+    id: 'crs_acc_01',
+    code: '15-110-201',
     group: '01',
-    name: 'طراحی الگوریتم‌ها',
+    name: 'اصول حسابداری ۲',
     units: 3,
-    type: 'تخصصی',
-    professor: 'دکتر احسان صادقی',
-    capacity: 35,
-    enrolledCount: 28,
-    prerequisites: ['ساختمان داده‌ها'],
+    type: 'پایه',
+    professor: 'دکتر سید محسن حسینی',
+    capacity: 40,
+    enrolledCount: 34,
+    prerequisites: ['اصول حسابداری ۱'],
     corequisites: [],
     schedule: [
       {
@@ -45,7 +45,7 @@ export const AVAILABLE_COURSES: Course[] = [
         dayIndex: 0,
         startTime: '08:00',
         endTime: '10:00',
-        room: 'کلاس ۲۰۱ (طبقه دوم)',
+        room: 'کلاس ۳۰۱ (طبقه سوم)',
         building: 'ساختمان خوارزمی'
       },
       {
@@ -53,28 +53,28 @@ export const AVAILABLE_COURSES: Course[] = [
         dayIndex: 2,
         startTime: '08:00',
         endTime: '10:00',
-        room: 'کلاس ۲۰۱ (طبقه دوم)',
+        room: 'کلاس ۳۰۱ (طبقه سوم)',
         building: 'ساختمان خوارزمی'
       }
     ],
     examDate: '1404/03/20',
     examTime: '08:30 - 10:30',
-    examRoom: 'سالن شماره ۱ امتحانات (سالن ابن‌سینا)',
-    examSeatNumber: 'A-42',
+    examRoom: 'سالن اصلی امتحانات (سالن غدیر)',
+    examSeatNumber: 'A-12',
     tuitionFee: 3600000,
-    description: 'مباحث پیشرفته طراحی الگوریتم، روش‌های حریصانه، برنامه‌نویسی پویا و تحلیل پیچیدگی محاسباتی.'
+    description: 'حسابداری شرکت‌های سهامی، تضامنی، اوراق قرضه، صورت جریان وجوه نقد و استهلاک دارایی‌ها.'
   },
   {
-    id: 'crs_02',
-    code: '14-110-304',
+    id: 'crs_acc_02',
+    code: '15-110-301',
     group: '01',
-    name: 'سیستم‌های عامل',
+    name: 'حسابداری میانه ۱',
     units: 3,
     type: 'تخصصی',
-    professor: 'دکتر مریم نوری',
-    capacity: 40,
-    enrolledCount: 38,
-    prerequisites: ['معماری کامپیوتر'],
+    professor: 'دکتر مژگان صراف',
+    capacity: 35,
+    enrolledCount: 30,
+    prerequisites: ['اصول حسابداری ۲'],
     corequisites: [],
     schedule: [
       {
@@ -82,7 +82,7 @@ export const AVAILABLE_COURSES: Course[] = [
         dayIndex: 1,
         startTime: '10:00',
         endTime: '12:00',
-        room: 'کلاس ۲۰۴',
+        room: 'کلاس ۳۰۴',
         building: 'ساختمان خوارزمی'
       },
       {
@@ -90,28 +90,28 @@ export const AVAILABLE_COURSES: Course[] = [
         dayIndex: 3,
         startTime: '10:00',
         endTime: '12:00',
-        room: 'کلاس ۲۰۴',
+        room: 'کلاس ۳۰۴',
         building: 'ساختمان خوارزمی'
       }
     ],
     examDate: '1404/03/24',
     examTime: '11:00 - 13:00',
-    examRoom: 'سالن شماره ۲ امتحانات',
-    examSeatNumber: 'B-18',
+    examRoom: 'سالن شماره ۱ امتحانات (ابن‌سینا)',
+    examSeatNumber: 'B-08',
     tuitionFee: 3600000,
-    description: 'مدیریت حافظه، زمان‌بندی پردازنده‌ها، بن‌بست‌ها و همزمانی سیستم‌های عامل مدرن.'
+    description: 'مفاهیم نظری حسابداری مالی، استانداردهای حسابداری ایران، دارایی‌های جاری و موجودی کالا.'
   },
   {
-    id: 'crs_03',
-    code: '14-110-308',
-    group: '01',
-    name: 'پایگاه داده‌ها',
+    id: 'crs_acc_03',
+    code: '15-110-305',
+    group: '02',
+    name: 'حسابداری صنعتی ۱ (بهایابی ۱)',
     units: 3,
     type: 'تخصصی',
-    professor: 'مهندس فرشید نیک‌نام',
+    professor: 'دکتر بهزاد کمالی',
     capacity: 35,
-    enrolledCount: 31,
-    prerequisites: ['ساختمان داده‌ها'],
+    enrolledCount: 29,
+    prerequisites: ['اصول حسابداری ۲'],
     corequisites: [],
     schedule: [
       {
@@ -119,36 +119,36 @@ export const AVAILABLE_COURSES: Course[] = [
         dayIndex: 0,
         startTime: '13:30',
         endTime: '15:30',
-        room: 'سایت تخصصی کامپیوتر ۲',
-        building: 'ساختمان ابوریحان'
+        room: 'کلاس ۲۰۲',
+        building: 'ساختمان مدیریت'
       },
       {
         day: 'چهارشنبه',
         dayIndex: 4,
         startTime: '10:00',
         endTime: '12:00',
-        room: 'کلاس ۱۰۸',
-        building: 'ساختمان خوارزمی'
+        room: 'کلاس ۲۰۲',
+        building: 'ساختمان مدیریت'
       }
     ],
     examDate: '1404/03/28',
     examTime: '08:30 - 10:30',
-    examRoom: 'سالن شماره ۱ امتحانات (سالن ابن‌سینا)',
-    examSeatNumber: 'A-89',
+    examRoom: 'سالن اصلی غدیر',
+    examSeatNumber: 'A-44',
     tuitionFee: 3600000,
-    description: 'مدل رابطه‌ای، زبان SQL پیشرفته، بهینه‌سازی پرس‌وجو، نرمال‌سازی و تراکنش‌های پایگاه داده.'
+    description: 'طبقه‌بندی هزینه‌ها، بهایابی مواد، دستمزد و سربار، و سیستم بهایابی سفارش کار.'
   },
   {
-    id: 'crs_04',
-    code: '14-110-312',
-    group: '02',
-    name: 'مهندسی نرم‌افزار ۱',
+    id: 'crs_acc_04',
+    code: '15-110-210',
+    group: '01',
+    name: 'ریاضیات و کاربرد آن در مدیریت و حسابداری',
     units: 3,
-    type: 'تخصصی',
-    professor: 'دکتر بهمن حیدری',
-    capacity: 30,
-    enrolledCount: 22,
-    prerequisites: ['برنامه‌نویسی پیشرفته'],
+    type: 'پایه',
+    professor: 'دکتر علیرضا محمدی',
+    capacity: 45,
+    enrolledCount: 38,
+    prerequisites: [],
     corequisites: [],
     schedule: [
       {
@@ -156,56 +156,56 @@ export const AVAILABLE_COURSES: Course[] = [
         dayIndex: 2,
         startTime: '13:30',
         endTime: '16:30',
-        room: 'کلاس ۲۰۵',
-        building: 'ساختمان خوارزمی'
+        room: 'کلاس ۱۰۳',
+        building: 'ساختمان مدیریت'
       }
     ],
     examDate: '1404/04/02',
     examTime: '14:00 - 16:00',
-    examRoom: 'سالن اصلی غدیر',
-    examSeatNumber: 'C-05',
+    examRoom: 'سالن شماره ۲ امتحانات',
+    examSeatNumber: 'C-19',
     tuitionFee: 3600000,
-    description: 'متدولوژی‌های چابک (Agile/Scrum)، الگوهای طراحی شی‌گرا، معماری نرم‌افزار و آزمون نرم‌افزار.'
+    description: 'ماتریس‌ها و دترمینان، مشتق و کاربرد آن در تحلیل هزینه‌ها و درآمد نهایی، انتگرال‌های کاربردی.'
   },
   {
-    id: 'crs_05',
-    code: '14-110-320',
+    id: 'crs_acc_05',
+    code: '15-110-220',
     group: '01',
-    name: 'آزمایشگاه سیستم‌های عامل',
-    units: 1,
-    type: 'عملی / آزمایشگاهی',
-    professor: 'مهندس سارا باقری',
-    capacity: 20,
-    enrolledCount: 16,
+    name: 'مبانی سازمان و مدیریت',
+    units: 3,
+    type: 'پایه',
+    professor: 'دکتر فرشته کریمی',
+    capacity: 50,
+    enrolledCount: 42,
     prerequisites: [],
-    corequisites: ['سیستم‌های عامل'],
+    corequisites: [],
     schedule: [
       {
         day: 'سه‌شنبه',
         dayIndex: 3,
         startTime: '13:30',
-        endTime: '15:30',
-        room: 'آزمایشگاه تخصصی لینوکس',
-        building: 'ساختمان ابوریحان'
+        endTime: '16:30',
+        room: 'کلاس ۲۰۱',
+        building: 'ساختمان مدیریت'
       }
     ],
-    examDate: '1404/03/18',
+    examDate: '1404/04/06',
     examTime: '10:00 - 12:00',
-    examRoom: 'آزمایشگاه تخصصی لینوکس',
-    examSeatNumber: 'L-12',
-    tuitionFee: 1800000,
-    description: 'کار عملی با شل لینوکس، اسکریپت‌نویسی Bash، سوکت پروگرمینگ و مدیریت پروسس‌ها.'
+    examRoom: 'سالن شماره ۱ امتحانات',
+    examSeatNumber: 'B-31',
+    tuitionFee: 3600000,
+    description: 'نظریه‌های مدیریت، برنامه‌ریزی استراتژیک، ساختارهای سازمانی و انگیزش پرسنل.'
   },
   {
-    id: 'crs_06',
+    id: 'crs_gen_01',
     code: '12-001-105',
     group: '03',
     name: 'اندیشه اسلامی ۲',
     units: 2,
     type: 'عمومی',
     professor: 'حجت‌الاسلام دکتر موسوی',
-    capacity: 50,
-    enrolledCount: 44,
+    capacity: 55,
+    enrolledCount: 48,
     prerequisites: ['اندیشه اسلامی ۱'],
     corequisites: [],
     schedule: [
@@ -214,273 +214,119 @@ export const AVAILABLE_COURSES: Course[] = [
         dayIndex: 4,
         startTime: '13:30',
         endTime: '15:30',
-        room: 'سالن آمفی تئاتر مطهری',
+        room: 'سالن آمفی‌تئاتر مطهری',
         building: 'ساختمان مرکزی'
       }
     ],
-    examDate: '1404/04/05',
+    examDate: '1404/04/10',
     examTime: '08:30 - 10:00',
-    examRoom: 'سالن شماره ۲ امتحانات',
-    examSeatNumber: 'B-77',
+    examRoom: 'سالن اصلی غدیر',
+    examSeatNumber: 'C-72',
     tuitionFee: 2400000,
     description: 'مباحث نبوت، امامت، معادشناسی و فلسفه دین در جهان معاصر.'
   },
   {
-    id: 'crs_07',
-    code: '14-110-330',
+    id: 'crs_acc_06',
+    code: '15-110-315',
     group: '01',
-    name: 'شبکه‌های کامپیوتری',
-    units: 3,
-    type: 'تخصصی',
-    professor: 'دکتر علیرضا کاظمی',
-    capacity: 35,
-    enrolledCount: 25,
-    prerequisites: ['سیستم‌های عامل'],
-    corequisites: [],
-    schedule: [
-      {
-        day: 'یکشنبه',
-        dayIndex: 1,
-        startTime: '15:30',
-        endTime: '17:30',
-        room: 'کلاس ۲۰۱',
-        building: 'ساختمان خوارزمی'
-      },
-      {
-        day: 'سه‌شنبه',
-        dayIndex: 3,
-        startTime: '15:30',
-        endTime: '17:30',
-        room: 'کلاس ۲۰۱',
-        building: 'ساختمان خوارزمی'
-      }
-    ],
-    examDate: '1404/04/09',
-    examTime: '11:00 - 13:00',
-    examRoom: 'سالن اصلی غدیر',
-    examSeatNumber: 'C-34',
-    tuitionFee: 3600000,
-    description: 'پروتکل‌های اینترنت TCP/IP، مسیریابی، لایه‌های مدل OSI و امنیت انتقال داده.'
-  },
-  {
-    id: 'crs_08',
-    code: '11-100-202',
-    group: '01',
-    name: 'ریاضی مهندسی',
-    units: 3,
-    type: 'پایه',
-    professor: 'دکتر محمد صفا',
-    capacity: 40,
-    enrolledCount: 33,
-    prerequisites: ['معادلات دیفرانسیل', 'ریاضی عمومی ۲'],
-    corequisites: [],
-    schedule: [
-      {
-        day: 'شنبه',
-        dayIndex: 0,
-        startTime: '10:00',
-        endTime: '12:00',
-        room: 'کلاس ۱۰۲',
-        building: 'ساختمان علوم پایه'
-      },
-      {
-        day: 'دوشنبه',
-        dayIndex: 2,
-        startTime: '10:00',
-        endTime: '12:00',
-        room: 'کلاس ۱۰۲',
-        building: 'ساختمان علوم پایه'
-      }
-    ],
-    examDate: '1404/04/12',
-    examTime: '08:30 - 11:00',
-    examRoom: 'سالن شماره ۱ امتحانات (سالن ابن‌سینا)',
-    examSeatNumber: 'A-15',
-    tuitionFee: 3600000,
-    description: 'سری فوریه، تبدیل فوریه، توابع مختلط و معادلات با مشتقات جزئی (PDE).'
-  },
-  {
-    id: 'crs_09',
-    code: '14-110-340',
-    group: '01',
-    name: 'هوش مصنوعی و سیستم‌های خبره',
-    units: 3,
-    type: 'تخصصی',
-    professor: 'دکتر نسترن شجاعی',
-    capacity: 30,
-    enrolledCount: 29,
-    prerequisites: ['طراحی الگوریتم‌ها'],
-    corequisites: [],
-    schedule: [
-      {
-        day: 'یکشنبه',
-        dayIndex: 1,
-        startTime: '08:00',
-        endTime: '10:00',
-        room: 'کلاس ۲۰۳',
-        building: 'ساختمان خوارزمی'
-      },
-      {
-        day: 'سه‌شنبه',
-        dayIndex: 3,
-        startTime: '08:00',
-        endTime: '10:00',
-        room: 'کلاس ۲۰۳',
-        building: 'ساختمان خوارزمی'
-      }
-    ],
-    examDate: '1404/04/15',
-    examTime: '14:00 - 16:30',
-    examRoom: 'سالن شماره ۲ امتحانات',
-    examSeatNumber: 'B-50',
-    tuitionFee: 3600000,
-    description: 'جستجوی اکتشافی (A*, Minimax)، منطق مرتبه اول، یادگیری ماشین مقدماتی و پردازش زبان طبیعی.'
-  },
-  {
-    id: 'crs_10',
-    code: '12-001-101',
-    group: '04',
-    name: 'زبان فارسی عمومی',
+    name: 'حقوق بازرگانی و تجارت',
     units: 2,
-    type: 'عمومی',
-    professor: 'دکتر علی اکبر دهقانی',
+    type: 'پایه',
+    professor: 'دکتر مسعود دهکردی',
     capacity: 45,
-    enrolledCount: 40,
+    enrolledCount: 35,
     prerequisites: [],
     corequisites: [],
     schedule: [
       {
-        day: 'چهارشنبه',
-        dayIndex: 4,
-        startTime: '08:00',
-        endTime: '10:00',
-        room: 'کلاس ۱۰۵',
-        building: 'ساختمان مرکزی'
+        day: 'یکشنبه',
+        dayIndex: 1,
+        startTime: '15:30',
+        endTime: '17:30',
+        room: 'کلاس ۲۰۵',
+        building: 'ساختمان مدیریت'
       }
     ],
-    examDate: '1404/04/18',
-    examTime: '08:30 - 10:00',
-    examRoom: 'سالن اصلی غدیر',
-    examSeatNumber: 'C-91',
+    examDate: '1404/04/14',
+    examTime: '11:00 - 13:00',
+    examRoom: 'سالن شماره ۲ امتحانات',
+    examSeatNumber: 'A-22',
     tuitionFee: 2400000,
-    description: 'شعر و نثر کهن و معاصر فارسی، آیین نگارش و درست‌نویسی مقالات علمی.'
+    description: 'قوانین تجارت ایران، اسناد تجاری (چک، سفته، برات)، ورشکستگی و قراردادهای بازرگانی.'
   }
 ];
 
 export const INITIAL_ENROLLED_COURSES: Course[] = [
-  AVAILABLE_COURSES[0], // طراحی الگوریتم‌ها (3)
-  AVAILABLE_COURSES[1], // سیستم‌های عامل (3)
-  AVAILABLE_COURSES[2], // پایگاه داده‌ها (3)
-  AVAILABLE_COURSES[3], // مهندسی نرم‌افزار ۱ (3)
-  AVAILABLE_COURSES[4], // آزمایشگاه سیستم‌های عامل (1)
+  AVAILABLE_COURSES[0], // اصول حسابداری ۲ (3)
+  AVAILABLE_COURSES[1], // حسابداری میانه ۱ (3)
+  AVAILABLE_COURSES[2], // حسابداری صنعتی ۱ (3)
+  AVAILABLE_COURSES[3], // ریاضیات و کاربرد آن در حسابداری (3)
+  AVAILABLE_COURSES[4], // مبانی سازمان و مدیریت (3)
   AVAILABLE_COURSES[5], // اندیشه اسلامی ۲ (2)
-]; // Total: 15 units
+]; // Total: 17 units
 
 export const INITIAL_PAYMENT_TRANSACTIONS: PaymentTransaction[] = [
   {
-    id: 'pay_01',
-    trackingCode: 'SEP-7821940',
-    referenceNumber: '89102459114',
-    amount: 18000000,
-    date: '1403/11/15',
-    time: '14:23:10',
-    description: 'پرداخت شهریه ثابت نیمسال اول ۱۴۰۴ - ۱۴۰۵',
-    gateway: 'به‌پرداخت ملت',
-    status: 'موفق',
-    cardNumberMasked: '۶۰۳۷-۹۹**-****-۴۴۱۸',
-    receiptNumber: 'REC-1403-9082'
-  },
-  {
-    id: 'pay_02',
-    trackingCode: 'SEP-6591023',
-    referenceNumber: '44501298412',
-    amount: 15000000,
-    date: '1403/07/10',
-    time: '09:45:32',
-    description: 'قسط اول شهریه متغیر نیمسال گذشته',
-    gateway: 'سداد ملی',
-    status: 'موفق',
-    cardNumberMasked: '۶۰۳۷-۹۹**-****-۴۴۱۸',
-    receiptNumber: 'REC-1403-3419'
-  },
-  {
-    id: 'pay_03',
-    trackingCode: 'SEP-4109824',
-    referenceNumber: '11294801934',
-    amount: 12000000,
-    date: '1403/04/22',
-    time: '18:11:05',
-    description: 'تسویه حساب ترم تابستان ۱۴۰۳',
+    id: 'tx_01',
+    trackingCode: 'SHP-994827103',
+    referenceNumber: 'REF-789012345678',
+    amount: 15000000, // 1,500,000 Tomans
+    date: '۱۴۰۳/۱۱/۱۵',
+    time: '۱۴:۳۲:۱۸',
     gateway: 'سامان کیش',
     status: 'موفق',
-    cardNumberMasked: '۵۸۹۲-۱۰**-****-۱۲۰۹',
-    receiptNumber: 'REC-1403-1102'
+    description: 'پرداخت علی‌الحساب شهریه ثابت نیمسال اول ۱۴۰۴ - ۱۴۰۵',
+    cardNumberMasked: '۶۲۱۹-****-****-۴۴۵۲',
+    receiptNumber: 'RCP-883921'
+  },
+  {
+    id: 'tx_02',
+    trackingCode: 'SHP-883920194',
+    referenceNumber: 'REF-554123987654',
+    amount: 12000000, // 1,200,000 Tomans
+    date: '۱۴۰۳/۰۷/۱۰',
+    time: '۰۹:۱۵:۴۴',
+    gateway: 'به‌پرداخت ملت',
+    status: 'موفق',
+    description: 'تسویه بدهی نیمسال دوم سال تحصیلی ۱۴۰۲ - ۱۴۰۳',
+    cardNumberMasked: '۶۱۰۴-****-****-۱۱۸۹',
+    receiptNumber: 'RCP-661092'
   }
 ];
 
 export const TRANSCRIPT_HISTORY: SemesterGrade[] = [
   {
-    termName: 'نیمسال اول ۱۴۰۱ - ۱۴۰۲',
-    termNumber: 1,
-    passedUnits: 18,
-    termGpa: 17.50,
-    courses: [
-      { code: '11-100-101', name: 'ریاضی عمومی ۱', units: 3, grade: 18.5, status: 'قبول' },
-      { code: '11-100-103', name: 'فیزیک ۱ (مکانیک)', units: 3, grade: 16.0, status: 'قبول' },
-      { code: '14-110-101', name: 'مبانی کامپیوتر و برنامه‌نویسی', units: 3, grade: 19.5, status: 'قبول' },
-      { code: '14-110-102', name: 'کارگاه کامپیوتر', units: 1, grade: 20.0, status: 'قبول' },
-      { code: '12-001-100', name: 'زبان عمومی', units: 3, grade: 17.0, status: 'قبول' },
-      { code: '12-001-103', name: 'تربیت بدنی ۱', units: 1, grade: 18.0, status: 'قبول' },
-      { code: '12-001-104', name: 'اندیشه اسلامی ۱', units: 2, grade: 16.5, status: 'قبول' },
-      { code: '12-001-106', name: 'اخلاق اسلامی', units: 2, grade: 17.0, status: 'قبول' },
-    ]
-  },
-  {
-    termName: 'نیمسال دوم ۱۴۰۱ - ۱۴۰۲',
-    termNumber: 2,
-    passedUnits: 19,
-    termGpa: 17.90,
-    courses: [
-      { code: '11-100-102', name: 'ریاضی عمومی ۲', units: 3, grade: 17.0, status: 'قبول' },
-      { code: '11-100-104', name: 'فیزیک ۲ (الکتریسیته و مغناطیس)', units: 3, grade: 16.5, status: 'قبول' },
-      { code: '14-110-201', name: 'برنامه‌نویسی پیشرفته (Java)', units: 3, grade: 19.0, status: 'قبول' },
-      { code: '14-110-203', name: 'ساختمان‌های گسسته', units: 3, grade: 18.5, status: 'قبول' },
-      { code: '14-110-205', name: 'مدارهای منطقی', units: 3, grade: 17.5, status: 'قبول' },
-      { code: '14-110-206', name: 'آزمایشگاه مدارهای منطقی', units: 1, grade: 19.0, status: 'قبول' },
-      { code: '12-001-107', name: 'تاریخ تحلیلی صدر اسلام', units: 2, grade: 18.0, status: 'قبول' },
-      { code: '12-001-108', name: 'ورزش ۱', units: 1, grade: 19.5, status: 'قبول' },
-    ]
-  },
-  {
     termName: 'نیمسال اول ۱۴۰۲ - ۱۴۰۳',
-    termNumber: 3,
-    passedUnits: 19,
-    termGpa: 18.10,
+    termNumber: 1,
+    passedUnits: 20,
+    termGpa: 17.60,
     courses: [
-      { code: '14-110-202', name: 'ساختمان داده‌ها', units: 3, grade: 19.0, status: 'قبول' },
-      { code: '14-110-204', name: 'معماری کامپیوتر', units: 3, grade: 17.5, status: 'قبول' },
-      { code: '14-110-207', name: 'مدارهای الکتریکی', units: 3, grade: 16.5, status: 'قبول' },
-      { code: '11-100-201', name: 'معادلات دیفرانسیل', units: 3, grade: 18.0, status: 'قبول' },
-      { code: '11-100-203', name: 'آمار و احتمالات مهندسی', units: 3, grade: 19.5, status: 'قبول' },
-      { code: '12-001-109', name: 'تفسیر موضوعی قرآن', units: 2, grade: 18.5, status: 'قبول' },
-      { code: '14-110-208', name: 'آزمایشگاه معماری کامپیوتر', units: 1, grade: 18.0, status: 'قبول' },
-      { code: '12-001-110', name: 'دانش خانواده و جمعیت', units: 1, grade: 17.5, status: 'قبول' },
+      { code: '15-110-101', name: 'اصول حسابداری ۱', units: 3, grade: 18.5, status: 'قبول' },
+      { code: '15-110-102', name: 'کلیات اقتصاد خرد', units: 3, grade: 17.0, status: 'قبول' },
+      { code: '15-110-103', name: 'ریاضیات پایه', units: 3, grade: 18.0, status: 'قبول' },
+      { code: '12-001-101', name: 'فارسی عمومی', units: 3, grade: 19.0, status: 'قبول' },
+      { code: '12-001-102', name: 'زبان انگلیسی عمومی', units: 3, grade: 17.5, status: 'قبول' },
+      { code: '12-001-103', name: 'اندیشه اسلامی ۱', units: 2, grade: 18.0, status: 'قبول' },
+      { code: '12-001-104', name: 'تربیت بدنی ۱', units: 1, grade: 20.0, status: 'قبول' },
+      { code: '15-110-104', name: 'مهارت‌های کاربردی رایانه در حسابداری', units: 2, grade: 19.0, status: 'قبول' },
     ]
   },
   {
     termName: 'نیمسال دوم ۱۴۰۲ - ۱۴۰۳',
-    termNumber: 4,
-    passedUnits: 20,
-    termGpa: 18.25,
+    termNumber: 2,
+    passedUnits: 22,
+    termGpa: 18.30,
     courses: [
-      { code: '14-110-210', name: 'زبان‌های ماشین و برنامه‌سازی سیستم', units: 3, grade: 18.0, status: 'قبول' },
-      { code: '14-110-212', name: 'سیگنال‌ها و سیستم‌ها', units: 3, grade: 17.5, status: 'قبول' },
-      { code: '14-110-215', name: 'نظریه زبان‌ها و اتوماتا', units: 3, grade: 19.0, status: 'قبول' },
-      { code: '14-110-216', name: 'اصول طراحی کامپایلر', units: 3, grade: 18.5, status: 'قبول' },
-      { code: '14-110-218', name: 'روش‌های محاسبات عددی', units: 2, grade: 18.0, status: 'قبول' },
-      { code: '14-110-219', name: 'آزمایشگاه شبکه‌های محلی', units: 1, grade: 20.0, status: 'قبول' },
-      { code: '12-001-111', name: 'انقلاب اسلامی ایران', units: 2, grade: 17.5, status: 'قبول' },
-      { code: '14-110-220', name: 'زبان تخصصی کامپیوتر', units: 3, grade: 19.0, status: 'قبول' },
+      { code: '15-110-105', name: 'کلیات اقتصاد کلان', units: 3, grade: 18.0, status: 'قبول' },
+      { code: '15-110-106', name: 'روش‌های آماری در حسابداری و مدیریت', units: 3, grade: 19.0, status: 'قبول' },
+      { code: '15-110-107', name: 'روانشناسی کار و سازمانی', units: 2, grade: 17.5, status: 'قبول' },
+      { code: '15-110-108', name: 'روش تحقیق در حسابداری', units: 2, grade: 18.5, status: 'قبول' },
+      { code: '12-001-107', name: 'تاریخ تحلیلی صدر اسلام', units: 2, grade: 18.0, status: 'قبول' },
+      { code: '12-001-108', name: 'ورزش ۱', units: 1, grade: 19.5, status: 'قبول' },
+      { code: '12-001-109', name: 'تفسیر موضوعی قرآن', units: 2, grade: 18.5, status: 'قبول' },
+      { code: '12-001-110', name: 'دانش خانواده و جمعیت', units: 1, grade: 18.0, status: 'قبول' },
+      { code: '15-110-109', name: 'مالیه عمومی و بودجه‌ریزی', units: 3, grade: 17.5, status: 'قبول' },
+      { code: '15-110-110', name: 'اخلاق حرفه‌ای در حسابداری', units: 3, grade: 19.5, status: 'قبول' },
     ]
   }
 ];
@@ -492,7 +338,7 @@ export const ANNOUNCEMENTS: AnnouncementItem[] = [
     category: 'آموزشی',
     date: '۱۴۰۳/۱۱/۲۰',
     isImportant: true,
-    content: 'به اطلاع کلیه دانشجویان گرامی موسسه آموزش عالی غیرانتفاعی سپاهان می‌رساند فرآیند انتخاب واحد از تاریخ ۲۵ بهمن‌ماه طبق جدول زمان‌بندی ورودی‌ها در پرتال آموزشی آغاز خواهد شد. دانشجویانی که بدهی شهریه دارند لازم است پیش از موعد اقدام به تسویه نمایند.',
+    content: 'به اطلاع دانشجویان محترم رشته حسابداری و مدیریت موسسه آموزش عالی سپاهان می‌رساند فرآیند انتخاب واحد طبق جدول زمان‌بندی در پرتال آموزشی آغاز شده است.',
     author: 'معاونت آموزشی و تحصیلات تکمیلی موسسه سپاهان'
   },
   {
@@ -510,39 +356,30 @@ export const ANNOUNCEMENTS: AnnouncementItem[] = [
     category: 'امتحانات',
     date: '۱۴۰۳/۱۱/۱۰',
     isImportant: true,
-    content: 'به همراه داشتن پرینت کارت ورود به جلسه (عکس‌دار) و کارت دانشجویی در کلیه جلسات آزمون الزامی است. ورود تلفن همراه و وسایل الکترونیکی به سالن‌های امتحانات اکیداً ممنوع می‌باشد.',
+    content: 'به همراه داشتن پرینت کارت ورود به جلسه (عکس‌دار) و کارت دانشجویی در کلیه جلسات آزمون الزامی است.',
     author: 'ستاد برگزاری آزمون‌های موسسه سپاهان'
-  },
-  {
-    id: 'anc_04',
-    title: 'برگزاری کارگاه تخصصی مهندسی نرم‌افزار و معماری ابری در سالن همایش‌ها',
-    category: 'عمومی و رفاهی',
-    date: '۱۴۰۳/۱۱/۰۵',
-    isImportant: false,
-    content: 'انجمن علمی گروه کامپیوتر موسسه سپاهان کارگاه آموزشی ۳ روزه پیرامون معماری مایکروسرویس و Docker برگزار می‌نماید. جهت ثبت‌نام به دفتر انجمن مراجعه نمایید.',
-    author: 'روابط عمومی و امور فرهنگی موسسه آموزش عالی سپاهان'
   }
 ];
 
 export const INITIAL_STUDENT_REQUESTS: StudentRequest[] = [
   {
     id: 'req_01',
-    trackingCode: 'REQ-403-9912',
-    title: 'صدور گواهی اشتغال به تحصیل با درج شماره معافیت تحصیلی',
+    trackingCode: 'REQ-401089',
+    title: 'گواهی اشتغال به تحصیل با درج معدل',
     type: 'گواهی اشتغال به تحصیل',
-    createdAt: '۱۴۰۳/۱۱/۱۴',
+    createdAt: '۱۴۰۳/۱۱/۱۲',
     status: 'تایید شده',
-    description: 'جهت ارائه به پلیس +۱۰ و سازمان نظام وظیفه عمومی اصفهان',
-    adminResponse: 'گواهی صادر گردید. می‌توانید نسخه رسمی ممهور به مهر دیجیتال را از بخش مکاتبات پرتال دانلود نمایید.'
+    description: 'درخواست صدور گواهی اشتغال به تحصیل جهت ارائه به سازمان نظام وظیفه و بانک.',
+    adminResponse: 'گواهی اشتغال به تحصیل صادر گردید و با مهر دیجیتال دانشگاه در سامانه ثبت شد.'
   },
   {
     id: 'req_02',
-    trackingCode: 'REQ-403-8821',
-    title: 'درخواست تقسیط شهریه متغیر در ۳ قسط مساوی',
+    trackingCode: 'REQ-401095',
+    title: 'درخواست پرداخت اقساطی شهریه',
     type: 'درخواست تقسیط شهریه',
-    createdAt: '۱۴۰۳/۱۱/۱۷',
-    status: 'تایید شده',
-    description: 'به دلیل تاخیر در دریافت حقوق، درخواست تقسیط مانده بدهی شهریه متغیر به ۳ مرحله را دارم.',
-    adminResponse: 'موافقت شد. اقساط در جدول پرداخت‌های شهریه با سررسیدهای اسفند، فروردین و اردیبهشت تعریف شد.'
+    createdAt: '۱۴۰۳/۱۱/۱۴',
+    status: 'در حال بررسی',
+    description: 'درخواست تقسیط مانده بدهی شهریه متغیر به دو قسط متوالی.',
+    adminResponse: 'درخواست در کارتابل امور مالی دانشگاه در حال بررسی می‌باشد.'
   }
 ];
